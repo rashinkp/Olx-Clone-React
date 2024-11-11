@@ -5,6 +5,7 @@ import arrow_icon from "../assets/arrow_down.png";
 import search_icon_white from "../assets/search_icon_white.png";
 
 import Login from "./Login";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   const [loginPop, setLoginPop] = useState(false);
@@ -16,7 +17,13 @@ const Navbar = (props) => {
   return (
     <>
       <div className="flex p-1 items-center bg-gray-100">
-        <img src={olx_icon} alt="OLX Logo" className="w-20 h-20 object-cover" />
+        <Link to='/'>
+          <img
+            src={olx_icon}
+            alt="OLX Logo"
+            className="w-20 h-20 object-cover"
+          />
+        </Link>
 
         <div className="flex border border--black w-64 p-2 ml-2 items-center relative">
           <img

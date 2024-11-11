@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = ({ toggleModal }) => {
   return (
@@ -46,9 +47,11 @@ const Login = ({ toggleModal }) => {
               </button>
             </div>
             <h1 className="text-center mt-3 text-white">OR</h1>
-            <h1 className="text-center text-white mt-3 underline cursor-pointer">
-              Login with Email
-            </h1>
+            <Link to="/signin">
+              <h1 className="text-center text-white mt-3 underline cursor-pointer">
+                Login with Email
+              </h1>
+            </Link>
 
             <div className="footer-section pt-20">
               <p className="text-gray-300 text-center text-sm">
