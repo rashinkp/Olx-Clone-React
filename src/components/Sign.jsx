@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "./AuthContext";
 
 const Sign = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [sign, setSign] = useState("Sign Up");
   const [loginError, setLoginError] = useState("");
@@ -37,10 +39,11 @@ const Sign = () => {
       const response = await axios.post(url, formRes);
 
       if (response) {
+        login();
         navigate("/");
       }
     } catch (err) {
-      setServerResponse(err.response.data.message);
+      setServerResponse(err?.response?.data?.message);
       console.log("error found while submitting data", err.message);
     }
   };

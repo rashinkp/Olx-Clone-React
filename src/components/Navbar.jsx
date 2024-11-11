@@ -6,8 +6,10 @@ import search_icon_white from "../assets/search_icon_white.png";
 
 import Login from "./Login";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const Navbar = (props) => {
+  const { isAuthenticated, logout } = useAuth();
   const [loginPop, setLoginPop] = useState(false);
 
   const toggleModal = () => {
@@ -17,7 +19,7 @@ const Navbar = (props) => {
   return (
     <>
       <div className="flex p-1 items-center bg-gray-100">
-        <Link to='/'>
+        <Link to="/">
           <img
             src={olx_icon}
             alt="OLX Logo"
@@ -68,13 +70,22 @@ const Navbar = (props) => {
             className="w-5 h-5 object-cover mt-1 ml-1"
           />
         </div>
-        <div
-          onClick={toggleModal}
-          className="flex h-12 p-2 ml-1 cursor-pointer"
-        >
-          <h1 className="font-bold text-lg cursor-pointer underline hover:no-underline">
-            Login
-          </h1>
+
+        <div className="flex h-12 p-2 ml-1 cursor-pointer">
+          {isAuthenticated ? (
+            <h1
+              className="font-bold text-lg cursor-pointer underline hover:no-underline"
+              onClick={logout}
+            >
+              Logout
+            </h1>
+          ) : (
+            <Link to="/signin">
+              <h1 className="font-bold text-lg cursor-pointer underline hover:no-underline">
+                Login
+              </h1>
+            </Link>
+          )}
         </div>
 
         <div className="w-28 flex h-12 p-2 ml-4 cursor-pointer rounded-full border-yellow-500 border">
