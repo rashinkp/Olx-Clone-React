@@ -53,7 +53,7 @@ const Sign = () => {
       case "name":
         if (sign === "Sign Up") {
           return { required: "Full name is required" };
-        }
+        } 
         return {};
       case "confirmPassword":
         if (sign === "Sign Up") {
