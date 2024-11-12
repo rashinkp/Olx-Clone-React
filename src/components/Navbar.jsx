@@ -7,13 +7,22 @@ import search_icon_white from "../assets/search_icon_white.png";
 import Login from "./Login";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-
+import { useNavigate } from "react-router-dom";
 const Navbar = (props) => {
-  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  const { userStatus, setUserStatus } = useAuth();
   const [loginPop, setLoginPop] = useState(false);
 
   const toggleModal = () => {
     setLoginPop(!loginPop);
+  };
+
+  const handleSell = () => {
+    if (userStatus === "") {
+      toggleModal();
+    } else {
+      props.setAddProductStatus(true);
+    }
   };
 
   return (
@@ -71,25 +80,32 @@ const Navbar = (props) => {
           />
         </div>
 
-        <div className="flex h-12 p-2 ml-1 cursor-pointer">
-          {isAuthenticated ? (
+        <div className="flex-col h-12 p-1 ml-1 cursor-pointer">
+          <p className="block">{userStatus}</p>
+          {userStatus !== "" ? (
             <h1
               className="font-bold text-lg cursor-pointer underline hover:no-underline"
-              onClick={logout}
+              onClick={() => setUserStatus("")}
             >
               Logout
             </h1>
           ) : (
-            <Link to="/signin">
-              <h1 className="font-bold text-lg cursor-pointer underline hover:no-underline">
-                Login
-              </h1>
-            </Link>
+            <h1
+              onClick={toggleModal}
+              className="font-bold text-lg cursor-pointer underline hover:no-underline"
+            >
+              Login
+            </h1>
           )}
         </div>
 
         <div className="w-28 flex h-12 p-2 ml-4 cursor-pointer rounded-full border-yellow-500 border">
-          <h1 className="font-bold text-lg cursor-pointer ml-5">+SELL</h1>
+          <h1
+            onClick={handleSell}
+            className="font-bold text-lg cursor-pointer ml-5"
+          >
+            +SELL
+          </h1>
         </div>
       </div>
 

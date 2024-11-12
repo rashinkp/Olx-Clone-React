@@ -5,9 +5,9 @@ import axios from "axios";
 import { useAuth } from "./AuthContext";
 
 const Sign = () => {
-  const { login } = useAuth();
+  const { setUserStatus } = useAuth();
   const navigate = useNavigate();
-  const [sign, setSign] = useState("Sign Up");
+  const [sign, setSign] = useState("Sign In");
   const [loginError, setLoginError] = useState("");
   const [serverResponse, setServerResponse] = useState("");
   const {
@@ -39,7 +39,7 @@ const Sign = () => {
       const response = await axios.post(url, formRes);
 
       if (response) {
-        login();
+        setUserStatus(response.data.user.name)
         navigate("/");
       }
     } catch (err) {
@@ -53,7 +53,7 @@ const Sign = () => {
       case "name":
         if (sign === "Sign Up") {
           return { required: "Full name is required" };
-        } 
+        }
         return {};
       case "confirmPassword":
         if (sign === "Sign Up") {
